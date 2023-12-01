@@ -1,0 +1,3 @@
+module aiowmi
+
+go 1.21.3
