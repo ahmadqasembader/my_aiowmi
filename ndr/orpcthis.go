@@ -2,7 +2,16 @@ package ndr
 
 // MS-DCOM 2.2.13 [ORPCTHIS and ORPCTHAT]
 
-import "aiowmi"
+ /*
+	The ORPCTHIS structure is the first (implicit) argument sent in an ORPC request PDU and is used to
+	send ORPC extension data to the server. The ORPCTHIS structure is also sent as an explicit
+	argument in activation RPC requests.
+ */
+ 
+import (
+	"aiowmi"
+	"encoding/binary"
+)
 
 type ORPCTHIS struct{
 	flags int
@@ -13,9 +22,6 @@ type ORPCTHIS struct{
  
 func (orpcthis *ORPCTHIS) from_data(flags int) []byte{
 
-	// EXT32 := "<L"
-	// EXT64 := "<Q"
-
 	orpcthis.flags = 0
 	orpcthis.reserved = 0
 	orpcthis.cid = main.GenCID()
@@ -23,8 +29,11 @@ func (orpcthis *ORPCTHIS) from_data(flags int) []byte{
 
 	
 	var buffer []byte
-	buffer = append(buffer, byte(orpcthis.flags))
-	buffer = append(buffer	, byte(orpcthis.reserved))
+	binary.LittleEndian.PutUint32(buffer, uint32(orpcthis.flags))
+	binary.LittleEndian.PutUint32(buffer, uint32(orpcthis.reserved))
+	
+	buffer = append(buffer, GetCOMVersion()...)
+
 
 	// TODO: return the extensions in byte type with the buffer.
 
