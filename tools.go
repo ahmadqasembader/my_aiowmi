@@ -4,7 +4,7 @@ import (
 	"math/rand"
 )
 
-// Generates a 32-bit CID used in 
+// Generates a 128-bit CID
 func GenCID() []byte{
 	// max := uint64(math.Pow(2, 32)) - 1
 	return []byte{

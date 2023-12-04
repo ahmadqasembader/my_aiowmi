@@ -1,12 +1,11 @@
 package main
 
 import (
-		"aiowmi/ndr"
+		//"aiowmi/ndr"
 		"encoding/binary"
 		"fmt"
 		)
 func main(){
-	ndr.Hello()
 
 		// Define a binary data format
 		//format := binary.LittleEndian
