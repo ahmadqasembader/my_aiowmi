@@ -9,7 +9,7 @@ package ndr
  */
  
 import (
-	"aiowmi"
+	"aiowmi/tools"
 	"encoding/binary"
 )
 
@@ -24,7 +24,7 @@ func (orpcthis *ORPCTHIS) from_data(flags int) []byte{
 
 	orpcthis.flags = 0
 	orpcthis.reserved = 0
-	orpcthis.cid = main.GenCID()
+	orpcthis.cid = tools.GenCID()
 	orpcthis.extensions = 0
 
 	
