@@ -20,15 +20,18 @@ type ORPCTHIS struct{
 	cid []byte
 }
  
-func (orpcthis *ORPCTHIS) from_data(flags int) []byte{
+func (orpcthis *ORPCTHIS) From_data(flags int) []byte{
 
 	orpcthis.flags = 0
 	orpcthis.reserved = 0
 	orpcthis.cid = tools.GenCID()
 	orpcthis.extensions = 0
-
 	
-	var buffer []byte
+	buffer := make([]byte, 0)
+
+	// ensuring a min of 8 byte in the buffer
+	buffer = append(buffer, make([]byte, 8)...) 
+
 	binary.LittleEndian.PutUint32(buffer, uint32(orpcthis.flags))
 	binary.LittleEndian.PutUint32(buffer, uint32(orpcthis.reserved))
 	
