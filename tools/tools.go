@@ -14,3 +14,8 @@ func GenCID() []byte{
 		byte(rand.Uint32()),
 	}
 }
+
+// Function to generate a fixed CID for testing
+func FixedCID() []byte {
+	return []byte{0x01, 0x02, 0x03, 0x04}
+}
