@@ -31,8 +31,8 @@ func (objref *OBJREF) Get_data() [] byte{
 	buffer := make([]byte, 0)
 	data   := make([]byte, 8)
 
-	binary.BigEndian.PutUint32(data, objref.Signature)
-	binary.BigEndian.PutUint32(data, objref.Flags)
+	binary.LittleEndian.PutUint32(data[ : 4], objref.Signature)
+	binary.LittleEndian.PutUint32(data[4 : 8], objref.Flags)
 
 	buffer = append(buffer, data...)
 
