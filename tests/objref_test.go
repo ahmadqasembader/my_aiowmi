@@ -1,8 +1,10 @@
 package test
 
 import (
-	"testing"
+	"aiowmi/ndr"
 	"aiowmi/tools"
+	"bytes"
+	"testing"
 )
 
 func TestBinToStr(t *testing.T) {
@@ -63,3 +65,27 @@ func TestBinToStr(t *testing.T) {
 		})
 	}
 }
+
+func TestObjref(t *testing.T){
+
+	objref := ndr.OBJREF {
+		Signature: 1464812877, // = 0x574F454D
+		Flags: 0x00000001,
+		IID: "4d9f4ab8-7d1c-11cf861e-0020af6e7c57",
+		CLSID: "000001a5-0000-0000-c000-000000000046",
+	}
+	expected := []byte{
+		77, 69, 79, 87, // Signature
+		1, 0, 0, 0, // Flag
+		48, 48, 48, 48, 48, 49, 97, 53, 45, 48, 48, 48, 48, 45, 48, 48, 
+		48, 48, 45, 99, 48, 48, 48, 45, 48, 48, 48, 48, 48, 48, 48, 48, 
+		48, 48, 52, 54, 52, 100, 57, 102, 52, 97, 98, 56, 45, 55, 100, 
+		49, 99, 45, 49, 49, 99, 102, 56, 54, 49, 101, 45, 48, 48, 50,
+		48, 97, 102, 54, 101, 55, 99, 53, 55,
+	}
+	results := objref.Get_data()
+	
+	if  !bytes.Equal(expected, results){
+		t.Errorf("Expected: %s, Got: %s", results, expected)
+	}
+} 
