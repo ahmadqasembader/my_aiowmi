@@ -68,13 +68,13 @@ func TestBinToStr(t *testing.T) {
 
 func TestObjref(t *testing.T){
 
-	objref := ndr.OBJREF {
+	objref_1 := ndr.OBJREF {
 		Signature: 1464812877, // = 0x574F454D
-		Flags: 0x00000001,
+		Flags: 0x00000001, // OBJREF_STANDARD
 		IID: "4d9f4ab8-7d1c-11cf861e-0020af6e7c57",
-		CLSID: "000001a5-0000-0000-c000-000000000046",
+		CLSID: "000001a5-0000-0000-c000-000000000046", // CLSID_ActivationContextInfo
 	}
-	expected := []byte{
+	expected_1 := []byte{
 		77, 69, 79, 87, // Signature
 		1, 0, 0, 0, // Flag
 		48, 48, 48, 48, 48, 49, 97, 53, 45, 48, 48, 48, 48, 45, 48, 48, 
@@ -83,9 +83,9 @@ func TestObjref(t *testing.T){
 		49, 99, 45, 49, 49, 99, 102, 56, 54, 49, 101, 45, 48, 48, 50,
 		48, 97, 102, 54, 101, 55, 99, 53, 55,
 	}
-	results := objref.Get_data()
+	results_1 := objref_1.Get_data()
 	
-	if  !bytes.Equal(expected, results){
-		t.Errorf("Expected: %s, Got: %s", results, expected)
+	if  !bytes.Equal(expected_1, results_1){
+		t.Errorf("Result - 1 ===>> Expected: %s, Got: %s", expected_1, results_1)
 	}
 } 
