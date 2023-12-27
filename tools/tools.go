@@ -37,3 +37,8 @@ func Bin_to_str(data []byte, offset int) string {
 	// Format the UUID and return it as a string
 	return fmt.Sprintf("%08X-%04X-%04X-%04X-%04X%08X", uuid1, uuid2, uuid3, uuid4, uuid5, uuid6)
 }
+
+//Returns a uuid without the last 4 bytes of the uuid
+func UUID_custom(uuid []byte) []byte{
+	return uuid[: len(uuid) - 4]
+}
