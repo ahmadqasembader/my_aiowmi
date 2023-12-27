@@ -8,7 +8,7 @@ import (
 	"errors"
 )
 
-const OBJREF_SIZE = 20
+const OBJREF_SIZE = 24
 const CLSID_SIZE = 16
 
 const (
