@@ -7,7 +7,7 @@ import (
 
 type OBJREFCustom struct{
 	objref		OBJREF
-	cb_extension   uint16
+	cb_extension   uint32
 	obj_ref_size   int
 	obj_data    []byte
 }
@@ -64,8 +64,8 @@ func (objref_custom *OBJREFCustom) Get_data() []byte{
 	temp := objref_custom.objref.Get_data()
 	offset := len(temp)
 	data = append(data[: offset], temp...)
-	binary.LittleEndian.PutUint16(data[offset :offset + 4], objref_custom.cb_extension)
-	binary.LittleEndian.PutUint16(data[offset + 4 : offset + 8], uint16(objref_custom.obj_ref_size))
+	binary.LittleEndian.PutUint32(data[offset :offset + 4], objref_custom.cb_extension)
+	binary.LittleEndian.PutUint32(data[offset + 4 : offset + 8], uint32(objref_custom.obj_ref_size))
 
 	data = append(data[offset + 8 : ], objref_custom.obj_data...)
 
